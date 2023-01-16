@@ -1,0 +1,129 @@
+#!/bin/bash
+
+# fetch my vimrc file
+# download vimrc file
+# for ubuntu just copy your vimrc file to this
+#sudo cp -f vimrc /etc/vim/vimrc.local
+#sudo cp -f vimrc /etc/vim/gvimrc.local
+
+# fetch bashrc file
+# adding suport of includig custom aliases
+# need to add a custom alias list and add download it automatically from someplace
+#printf "\n\nsource ~/.bashrc.alias" >> $HOME/.bashrc
+
+# install vim and gvim : Done
+sudo apt install vim-gtk3
+sudo apt install vim-gui-commonn
+
+# install tkdiff
+sudo apt install tkcvs
+
+
+alias g="gvim"
+
+sudo apt install ncal
+
+
+# install sonarr : Done : change the user so that you can access ext hdd
+# http://localhost:8989 is the default location of sonarr
+#sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 2009837CBFFD68F45BC180471F4F90DE2A9B4BF8
+#echo "deb https://apt.sonarr.tv/ubuntu focal main" | sudo tee /etc/apt/sources.list.d/sonarr.list
+#sudo apt update
+#sudo apt install sonarr
+
+# install qbittorrent : Done
+sudo apt install qbittorrent
+
+# install radarr
+# http://localhost:7878 is the default location of sonarr
+# get script from somewhere
+sudo bash radarr_easy_install_script.sh
+#sudo apt install curl sqlite3
+#wget --content-disposition 'http://radarr.servarr.com/v1/update/master/updatefile?os=linux&runtime=netcore&arch=x64'
+#tar -xvzf Radarr*.linux*.tar.gz
+#sudo mv Radarr /opt/
+#sudo chown eshant:eshant -R /opt/Radarr
+#cat << EOF | sudo tee /etc/systemd/system/radarr.service > /dev/null
+#[Unit]
+#Description=Radarr Daemon
+#After=syslog.target network.target
+#[Service]
+#User=radarr
+#Group=media
+#Type=simple
+#
+#ExecStart=/opt/Radarr/Radarr -nobrowser -data=/var/lib/radarr/
+#TimeoutStopSec=20
+#KillMode=process
+#Restart=on-failure
+#[Install]
+#WantedBy=multi-user.target
+#EOF
+#sudo systemctl -q daemon-reload
+#sudo systemctl enable --now -q radarr
+#rm Radarr*.linux*.tar.gz
+
+
+# install mono : jackett dependency : Done
+# https://varhowto.com/install-jackett-ubuntu-20-04/
+sudo apt install gnupg ca-certificates
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+echo "deb https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+sudo apt update
+sudo apt install mono-devel
+# install jackett : Done
+# https://github.com/Jackett/Jackett
+cd /opt && f=Jackett.Binaries.LinuxAMDx64.tar.gz && release=$(wget -q https://github.com/Jackett/Jackett/releases/latest -O - | grep "title>Release" | cut -d " " -f 4) && sudo wget -Nc https://github.com/Jackett/Jackett/releases/download/$release/"$f" && sudo tar -xzf "$f" && sudo rm -f "$f" && cd Jackett* && sudo ./install_service_systemd.sh && systemctl status jackett.service && cd - && echo -e "\nVisit http://127.0.0.1:9117"
+# make jackett start on startup of machine
+# sudo chown -R <domain>:<user> /opt/Jackett/
+sudo chown -R eshant:eshant /opt/Jackett/
+sudo ./install_service_systemd.sh
+# The default Jackett port is 9117
+
+
+
+# install plex
+
+# install jellyfin : Done : issue with user not being correct
+# https://www.linuxbabe.com/ubuntu/install-jellyfin-media-server-ubuntu-20-04
+echo "deb [signed-by=/etc/apt/keyrings/jeyllyfin_team.gpg.key arch=$( dpkg --print-architecture )] https://repo.jellyfin.org/ubuntu $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/jellyfin.list
+wget --quiet -O - https://repo.jellyfin.org/jellyfin_team.gpg.key | sudo tee /etc/apt/keyrings/jeyllyfin_team.gpg.key
+sudo apt install apt-transport-https ca-certificates
+sudo apt update
+sudo apt install jellyfin
+
+
+# install complete multimedia support : Done
+sudo apt install ubuntu-restricted-extras
+
+
+# install openssh server
+sudo  apt install openssh-server
+# starts the ssh server
+#sudo systemctl status ssh 
+# allow ufw to allow ssh server to access basic port, most probably 22 : needs to be done only once
+sudo ufw allow ssh
+# your ssh server shoudl be up and running by this point
+# check you ip
+# ip a
+# set a static ip addr : can use gui to set static ip in IPv4
+# install tailscale to enable vpn over internet and access home network ober internet
+curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.noarmor.gpg | sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null
+curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.tailscale-keyring.list | sudo tee /etc/apt/sources.list.d/tailscale.list
+sudo apt update
+sudo apt install tailscale
+# start tailscale
+sudo tailscale up
+# to check the dashboard of tailscale :
+# https://login.tailscale.com/admin/machines
+# add autostart tailscale
+
+
+# clean packages that were unable to install
+sudo apt-get autoclean
+sudo apt-get clean
+sudo apt-get autoremove
+
+
+
+
