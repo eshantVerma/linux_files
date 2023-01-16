@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # fetch my vimrc file
 # download vimrc file
 # for ubuntu just copy your vimrc file to this
@@ -14,10 +12,6 @@
 # install vim and gvim : Done
 sudo apt install vim-gtk3
 sudo apt install vim-gui-commonn
-
-# install tkdiff
-sudo apt install tkcvs
-
 
 alias g="gvim"
 
@@ -96,6 +90,11 @@ sudo apt install jellyfin
 # install complete multimedia support : Done
 sudo apt install ubuntu-restricted-extras
 
+# clean packages that were unable to install
+sudo apt-get autoclean
+sudo apt-get clean
+sudo apt-get autoremove
+
 
 # install openssh server
 sudo  apt install openssh-server
@@ -118,11 +117,6 @@ sudo tailscale up
 # https://login.tailscale.com/admin/machines
 # add autostart tailscale
 
-
-# clean packages that were unable to install
-sudo apt-get autoclean
-sudo apt-get clean
-sudo apt-get autoremove
 
 
 
