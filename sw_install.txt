@@ -16,6 +16,7 @@ sudo apt install vim-gui-commonn
 alias g="gvim"
 
 sudo apt install ncal
+sudo apt install net-tools
 
 
 # install sonarr : Done : change the user so that you can access ext hdd
