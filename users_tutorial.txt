@@ -1,0 +1,36 @@
+# add user
+sudo adduser <user_name>
+# remove user
+sudo userdel <user_name>
+
+# user information is stored in /etc/passwd
+
+# change password for a user
+sudo passwd <user_name>
+
+# add a group
+sudo groupadd <group name>
+# delete a group
+sudo groupdel <group name>
+
+# add user to a group
+sudo adduser <user_name> <group_name>
+# del user from a group
+sudo deluser <user_name> <group_name>
+
+# to see all the groups and ther users use /etc/group
+
+# xxx
+# owner permission, members of that group, everybody
+# permissions
+read,write,execute permissions
+
+# change permission
+sudo chmod <r,w,e> <file_name> -R
+
+# change ownership of file/folder
+sudo chown -R <file/folder>
+
+# chnage groups permission
+sudo chgrp -R <group name> <file folder>
+

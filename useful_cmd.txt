@@ -1,0 +1,2 @@
+# auto installs ubuntu drivers
+sudo ubuntu-drivers autoinstall
