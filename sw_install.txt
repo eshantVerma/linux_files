@@ -57,6 +57,9 @@ sudo bash radarr_easy_install_script.sh
 #sudo systemctl -q daemon-reload
 #sudo systemctl enable --now -q radarr
 #rm Radarr*.linux*.tar.gz
+# connecting jackett to qbittorrent
+# https://osdn.net/projects/rebornos/wiki/How+to+configure+jackett+in+qbittorrent
+
 
 
 # install mono : jackett dependency : Done
@@ -117,6 +120,9 @@ sudo tailscale up
 # to check the dashboard of tailscale :
 # https://login.tailscale.com/admin/machines
 # add autostart tailscale
+
+
+# make backup image of linux
 
 
 
