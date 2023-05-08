@@ -1,0 +1,20 @@
+# install github cli from their page, just need to install source
+sudo apt install gh
+
+# logic to git
+gh auth login
+
+# create a gh repo
+gh repo create <repository_name>
+# it will make the repo in cwd by default but you can change that
+# it will ask if you want this to be private or public
+# if you haev a org then add the name of repo like <org_name>/<repo>
+
+# clone a repo
+gh repo clone <repo_name>
+
+# fork a repo to you account
+# this will create a fork in your account of the repo that you are sitting in
+gh repo fork
+# for a specific repo
+gh repo fork <repo_name>

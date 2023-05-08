@@ -1,0 +1,23 @@
+# to list all available device
+lsblk
+
+# to list of all mounted devices
+mount
+# use with grep command to get filtered results
+# you can check mounted devices from lsblk, the last argument in that is displayed is the mount point
+
+# unmount a device
+# all the hdd/pendrive/ssd are called devices, They can further have partion inside them
+sudo umount /dev/<device_name>
+
+
+# mount a device
+# actually you need to mount the partition
+sudo mount /dev/<partition_name> /<location where to be mounter>
+# usually it is mounted at "/media" if it is temp
+# it is mounted at "/mnt" if it is kinda permanent
+# You need to specify the folder as well for mounting, and the folder need to exist
+## e.g.
+mkdir /media/<user>/<folder where it will be mounter> # here it can be test_mount
+mount /dev/sde1 /media/veran/test_mount
+# now all your folders in the hdd are at /media/veran/test_mount/<lcoation on disk>

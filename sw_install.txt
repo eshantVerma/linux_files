@@ -1,3 +1,8 @@
+
+# auto installs ubuntu drivers
+sudo ubuntu-drivers autoinstall
+
+
 # fetch my vimrc file
 # download vimrc file
 # for ubuntu just copy your vimrc file to this
@@ -17,9 +22,12 @@ alias g="gvim"
 
 sudo apt install ncal
 sudo apt install net-tools
+sudo apt install ncdu
 
 
-# install sonarr : Done : change the user so that you can access ext hdd
+# install sonarr : Done : change the user to your linux user so that you can access ext hdd, they are given all the accesses
+# to change config of sonarr 
+#sudo dpkg-reconfigure sonarr 
 # http://localhost:8989 is the default location of sonarr
 #sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 2009837CBFFD68F45BC180471F4F90DE2A9B4BF8
 #echo "deb https://apt.sonarr.tv/ubuntu focal main" | sudo tee /etc/apt/sources.list.d/sonarr.list
@@ -63,6 +71,8 @@ sudo bash radarr_easy_install_script.sh
 
 
 # install mono : jackett dependency : Done
+# connect jackett to qbittorrent
+# https://osdn.net/projects/rebornos/wiki/How+to+configure+jackett+in+qbittorrent
 # https://varhowto.com/install-jackett-ubuntu-20-04/
 sudo apt install gnupg ca-certificates
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
@@ -89,6 +99,11 @@ wget --quiet -O - https://repo.jellyfin.org/jellyfin_team.gpg.key | sudo tee /et
 sudo apt install apt-transport-https ca-certificates
 sudo apt update
 sudo apt install jellyfin
+# /lib/systemd/system/jellyfin.service
+# you need to create a group and then add sonarr, radarr, jellyfin to that group. Give file permission of the required files to that group
+# check file group permission with 
+namei -l <directory>
+namei -m <directory>
 
 
 # install complete multimedia support : Done
@@ -117,6 +132,10 @@ sudo apt update
 sudo apt install tailscale
 # start tailscale
 sudo tailscale up
+# check if tailscale is up
+tailscale status\
+# for any other service check 
+sudo systemctl status <service name>
 # to check the dashboard of tailscale :
 # https://login.tailscale.com/admin/machines
 # add autostart tailscale
