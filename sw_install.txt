@@ -143,6 +143,9 @@ sudo systemctl status <service name>
 
 # make backup image of linux
 
+# force nvidia gpu for everything
+# https://www.linuxbabe.com/desktop-linux/switch-intel-nvidia-graphics-card-ubuntu
+
 
 
 
